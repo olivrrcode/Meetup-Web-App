@@ -1,19 +1,19 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 
-import Card from "../ui/Card";
-import classes from "./MeetupItem.module.css";
-import FavouritesContext from "../../store/favourites-context";
+import Card from '../ui/Card';
+import classes from './MeetupItem.module.css';
+import FavoritesContext from '../../store/favourites-context';
 
 function MeetupItem(props) {
-  const favouriteCtx = useContext(FavouritesContext);
+  const favoritesCtx = useContext(FavoritesContext);
 
-  const itemIsFavourite = favouriteCtx.itemIsFavourite(props.id);
+  const itemIsFavorite = favoritesCtx.itemIsFavorite(props.id);
 
-  function toggleFavouriteStatusHandler() {
-    if (itemIsFavourite) {
-      favouriteCtx.removeFavourite(props.id);
+  function toggleFavoriteStatusHandler() {
+    if (itemIsFavorite) {
+      favoritesCtx.removeFavorite(props.id);
     } else {
-      favouriteCtx.addFavourite({
+      favoritesCtx.addFavorite({
         id: props.id,
         title: props.title,
         description: props.description,
@@ -24,23 +24,23 @@ function MeetupItem(props) {
   }
 
   return (
-    <li className={classes.item}>
-      <Card>
-        <div className={classes.image}>
-          <img src={props.image} alt={props.title} />
-        </div>
-        <div className={classes.content}>
-          <h3>{props.title}</h3>
-          <address>{props.address}</address>
-          <p>{props.description}</p>
-        </div>
-        <div className={classes.actions}>
-          <button onClick={toggleFavouriteStatusHandler}>
-            {itemIsFavourite ? "Remove from Favourites" : "Add To Favourites"}
-          </button>
-        </div>
-      </Card>
-    </li>
+      <li className={classes.item}>
+        <Card>
+          <div className={classes.image}>
+            <img src={props.image} alt={props.title} />
+          </div>
+          <div className={classes.content}>
+            <h3>{props.title}</h3>
+            <address>{props.address}</address>
+            <p>{props.description}</p>
+          </div>
+          <div className={classes.actions}>
+            <button onClick={toggleFavoriteStatusHandler}>
+              {itemIsFavorite ? 'Remove from Favorites' : 'To Favorites'}
+            </button>
+          </div>
+        </Card>
+      </li>
   );
 }
 
